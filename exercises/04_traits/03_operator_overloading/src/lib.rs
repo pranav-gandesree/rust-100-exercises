@@ -6,9 +6,17 @@ struct Ticket {
     status: String,
 }
 
-// TODO: Implement the `PartialEq` trait for `Ticket`.
-
-impl PartialEq for Ticket {}
+// TODO: Implement the `PartialEq` trait for `Ticket`
+// t1.eq(&t2); // here, inside eq(), `self` = t1, `other` = t2
+// Self here refers to the type being implemented, which is Ticket
+// So &Self means “a reference to a Ticket”
+// self refers to the current instance of Ticket
+// When you write self.title, you’re accessing the title field of this specific Ticket
+impl PartialEq for Ticket {
+    fn eq(&self, other: &Self)-> bool {
+        self.title == other.title && self.description == other.description && self.status == other.status
+    }
+}
 
 #[cfg(test)]
 mod tests {
